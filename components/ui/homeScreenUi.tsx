@@ -1,15 +1,45 @@
+import { FontAwesome } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { Pressable, Text, View } from "react-native";
+import { ImageBackground, Pressable, Text, View } from "react-native";
 
-export default function HomeScreenUi(){
-    return(
-        <View className="bg-gray-800">
-            <Text className="text-center text-2xl font-extrabold">Welcome To The Home Screen</Text>
-            <Text>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id mollitia aliquid possimus ad? Necessitatibus iusto ducimus voluptas alias! Fugit nobis esse dicta provident, sed placeat iusto dignissimos assumenda suscipit mollitia amet atque quis quod ipsam! Consequuntur soluta asperiores laboriosam, esse illum aut itaque, debitis libero voluptate ipsa perspiciatis vitae, iste veritatis ipsam sit. Illo distinctio incidunt facere dolor placeat ipsum!</Text>
+export default function HomeScreenUi() {
+  return (
+    <ImageBackground
+      source={require("@/assets/images/weather1.jpg")}
+      resizeMode="cover"
+      className="flex-1 w-full justify-center"
+    >
+        {/* Dark overlay tint */}
+        <View className="absolute inset-0 bg-black/40" />
+      
+        <View className="pt-10 bg-gray-100/20">
+            
+            <View className="p-4 mt-10 mx-4 rounded-lg bg-[rgba(0,0,0,0.6)]">
+            <View className="flex flex-row justify-center items-center">
+                <Text className="text-center text-xl text-gray-200 font-extrabold mr-4">
+                Weather Today!
+                </Text>
+                <FontAwesome name="cloud" size={32} color="#00b4d8" />
+            </View>
+            <Text className="text-center text-[#00b4d8] mt-2">
+                This weather app provides users with real-time weather updates, including temperature, conditions, and forecasts based on their location. Designed with a clean, modern interface using React Native and NativeWind, the app offers a welcoming screen and a detailed weather display to ensure users stay informed and prepared anytime, anywhere.
+            </Text>
+            </View>
 
-            <Pressable onPress={()=> router.push("/weather")}>
-                <Text>Visit Weather Channel Now</Text>
+            <Pressable
+            className="mt-6 p-3 bg-[#00b4d8] mx-auto rounded-md"
+            onPress={() => router.push("/weather")}
+            >
+            <Text className="font-bold">Visit Weather Channel Now!</Text>
+            </Pressable>
+
+            <Pressable
+            className="mb-10 mt-3 p-3 px-20 bg-[#00b4d8] mx-auto rounded-md"
+            onPress={() => router.push("/settings")}
+            >
+            <Text className="font-bold">Settings</Text>
             </Pressable>
         </View>
-    )
+    </ImageBackground>
+  );
 }
