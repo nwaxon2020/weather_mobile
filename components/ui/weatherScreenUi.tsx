@@ -6,14 +6,16 @@ import { ActivityIndicator, Alert, ImageBackground, Pressable, RefreshControl, S
 
 const ENDPOINT = "https://api.openweathermap.org/data/2.5/weather";
 
+//Interface for typeScript usage
 type Weather = {
     name: string;
     main: { temp: number; feels_like: number; humidity: number };
     weather: { main: string; description: string }[];
 };
 
+// Weather app function
 export default function WeatherScreenUi() {
-    // const [unit, setUnit] = useState<Unit>("metric");
+    // Stats and variables
     const [city, setCity] = useState<string | null>(null);
     const [input, setInput] = useState("");
     const [unit, setUnit] = useState<"metric" | "imperial">("metric");
@@ -22,13 +24,13 @@ export default function WeatherScreenUi() {
     const [refreshing, setRefreshing] = useState(false);
     const apiKey = process.env.EXPO_PUBLIC_OPENWEATHER_API_KEY;
 
-    /** fetch weather */
+    //fetch weather 
     const load = useCallback(
         async (_city?: string) => {
             try {
             setLoading(true);
 
-            const q = _city ?? city;
+            const q = _city ?? city; //Get city to pass into URl
             const url = q
                 ? `${ENDPOINT}?q=${encodeURIComponent(q)}&units=${unit}&appid=${apiKey}`
                 : await coordsUrl();
@@ -45,8 +47,8 @@ export default function WeatherScreenUi() {
             if (q) setCity(q);
             } catch (err: any) {
             console.warn(err);
-            Alert.alert("Weather error", err.message ?? "Unknown error");
-            setData(null);          // clear old data so UI doesn't try to read it
+            Alert.alert("Weather error", err.message ?? "Unknown error"); //alert error if any
+            setData(null);  // clear old data so UI doesn't try to read it
             } finally {
             setLoading(false);
             setRefreshing(false);
@@ -56,7 +58,7 @@ export default function WeatherScreenUi() {
     );
 
 
-    /** coords → URL helper */
+    // URL helper
     async function coordsUrl() {
         const { status } = await Location.requestForegroundPermissionsAsync(); //ask permission from user for location
         if (status !== "granted") {
@@ -66,10 +68,10 @@ export default function WeatherScreenUi() {
         return `${ENDPOINT}?lat=${loc.coords.latitude}&lon=${loc.coords.longitude}&units=${unit}&appid=${apiKey}`;
     }
 
-    /** pull to refresh */
+    //pull to refresh 
     const onRefresh = () => { setRefreshing(true); load(); };
 
-    /** load unit pref & first weather once screen appears */
+    //load unit pref & first weather once screen appears 
     useFocusEffect(
         useCallback(() => {
             (async () => {

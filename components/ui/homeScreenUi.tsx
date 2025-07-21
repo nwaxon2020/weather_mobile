@@ -2,15 +2,16 @@ import { FontAwesome } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { ImageBackground, Pressable, Text, View } from "react-native";
 
+// Function for the home page
 export default function HomeScreenUi() {
   return (
-    <ImageBackground
+    <ImageBackground //everything will be under this background Image
       source={require("@/assets/images/weather1.jpg")}
       resizeMode="cover"
       className="flex-1 w-full justify-center"
     >
         {/* Dark overlay tint */}
-        <View className="absolute inset-0 bg-black/40" />
+        <View className="absolute inset-0 bg-black/40" /> //give a little dark texture to the backgrond
       
         <View className="pt-10 bg-gray-100/20">
             
@@ -21,6 +22,8 @@ export default function HomeScreenUi() {
                 </Text>
                 <FontAwesome name="cloud" size={32} color="#00b4d8" />
             </View>
+            
+            //Overiew of weather app
             <Text className="text-center text-[#00b4d8] mt-2">
                 This weather app provides users with real-time weather updates, including temperature, conditions, and forecasts based on their location. Designed with a clean, modern interface using React Native and NativeWind, the app offers a welcoming screen and a detailed weather display to ensure users stay informed and prepared anytime, anywhere.
             </Text>

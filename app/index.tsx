@@ -5,7 +5,7 @@ export default function HomeScreen(){
 
     return(
 
-        <HomeScreenUi /> 
+        <HomeScreenUi /> //gotten fromthe compnnents folder
 
     )
 }

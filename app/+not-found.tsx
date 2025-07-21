@@ -1,6 +1,7 @@
 import { useRouter } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 
+//Incase a link searched is not there display this page
 export default function NotFound(){
     const router = useRouter()
 
